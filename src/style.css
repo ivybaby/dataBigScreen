@@ -1,0 +1,23 @@
+ @font-face {
+   font-family: 'MyFont';
+   src: url('./fonts/my-font.ttf') format('ttf');
+         /*url('./my-font.woff') format('woff');*/
+   font-weight: 600;
+   font-style: normal;
+}
+ body{
+     background:url("images/bg.png") repeat;
+ }
+
+.hello {
+    color: red;
+    font-family: 'MyFont';
+    /*background: url('images/user.png');*/
+}
+#main{
+    width: 100%;height: 100vh;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: -1;
+}
