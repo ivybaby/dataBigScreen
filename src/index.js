@@ -4,7 +4,9 @@ import Icon from './images/logo.png';
 import printMe from './print.js';
 
 import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/AdminLTE.css'
 import 'bootstrap/dist/js/bootstrap.js'
+
 require('bootstrap');
 
 var echarts = require('echarts');
