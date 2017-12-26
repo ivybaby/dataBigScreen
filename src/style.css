@@ -5,8 +5,12 @@
    font-weight: 600;
    font-style: normal;
 }
+img{
+    max-width: 100%;
+}
  body{
      background:url("images/bg.png") repeat;
+     overflow-y: hidden;
  }
 
 .hello {
@@ -15,9 +19,233 @@
     /*background: url('images/user.png');*/
 }
 #main{
-    width: 100%;height: 100vh;
+    width: 100%;height: 100%;
     position: absolute;
     top:0;
     left: 0;
     z-index: -1;
 }
+.height-inherit{
+    height:inherit;
+}
+
+.box-border-bg{
+    position: absolute;
+    width: 2px;
+    height:2px;
+    background: #ffffff;
+    float: left;
+}
+.box-em-bg{
+    height:32%;
+    position: relative;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.box{
+    height: 100%;
+    border:1px solid #075297;
+    margin-bottom: 0;
+}
+.box-body{
+    height: inherit;
+}
+.box-border-em{
+    position: absolute;
+}
+.box-border-top{
+    max-width: 100%;
+    background: url("images/light-high-top.png") no-repeat;
+    width: 302px;
+    height: 1px;
+    top:-1px;
+    left: 0;
+}
+ .box-border-left{
+     background: url("images/light-high-left.png") no-repeat;
+     height: inherit;
+     width: 1px;
+     top:0;
+     left: -1px;
+ }
+.box-border-bottom{
+    max-width: 100%;
+    background: url("images/light-high-bottom.png") no-repeat;
+    height: 1px;
+    width: 302px;
+    bottom:-1px;
+    right: 0;
+}
+ .box-border-right{
+     background: url("images/light-high-right.png") no-repeat;
+     width: 1px;
+     height: inherit;
+     top:0;
+     right: -1px;
+ }
+
+
+.bg-top-left{
+    top:0;
+    left:0;
+}
+.bg-top-right{
+    top:0;
+    right: 0;
+}
+ .bg-bottom-left{
+     left: 0;
+     bottom: 0;
+ }
+ .bg-bottom-right{
+     right: 0;
+     bottom: 0;
+ }
+ .right-box-em-bg, .right-bottom-box-em-bg{
+     margin-left:0;
+     margin-right: 5px;
+ }
+ .right-box-em-bg{
+     height: 52%;
+ }
+ .right-bottom-box-em-bg{
+     height: 45%;
+ }
+ /*
+ *layout
+ */
+ .col-4{
+     width: 30%;
+ }
+ .col-3{
+     width: 23%;
+ }
+ .col-5{
+     width: 47%;
+ }
+ /*
+ *layout-left
+  */
+ .item-header{
+     position: relative;
+ }
+ .item-header-img{
+     width:6%;
+     max-width: 30px;
+     min-width: 22px;
+     float: left;
+ }
+ .item-right{
+     margin-right: 5px;
+ }
+ .text-init{
+     color: #ffffff;
+ }
+ .time-border,.time-block-bg, .danwei{
+     position: absolute;
+ }
+ .time-bg{
+     display: inline-block;
+     position: relative;
+     background:#e7b729;
+     color: #ffffff;
+     padding: 5% 10%;
+     min-width: 70px;
+     text-align: center;
+     white-space: nowrap;
+
+ }
+.time-border-1{
+     content: url("images/top-left.png");
+     left:-1px;
+     top:-1px;
+ }
+ .time-border-2{
+     content: url("images/top-right.png");
+     right:-1px;
+     top:-1px;
+ }
+ .time-border-3{
+     content: url("images/bottom-left.png");
+     left:-1px;
+     bottom:-1px;
+ }
+ .time-border-4{
+     content: url("images/bottom-right.png");
+     right:-1px;
+     bottom:-1px;
+ }
+.time-block-bg{
+    display: inline-block;
+    right: 0;
+    top: -4px;
+}
+
+ .clearfix{zoom:1}
+ .clearfix:after{
+     content:".";
+     display:block;
+     height:0;
+     clear:both;
+     visibility:hidden;
+ }
+
+ /* 用电量 */
+ /*
+ *chart
+ */
+ #barUseDiv,#pieUseDiv,#pieSumDiv{
+     width: 100%;
+     height:calc(90%);
+ }
+
+
+ .item-header-img-icon{
+     width: 7%;
+ }
+ .time-bg-blue{
+     background: #00b7ee;
+     font-size: 17px;
+     right: 0;
+     padding-right:35px;
+     border-radius: 3px;
+     max-height: 32px;
+     min-width:105px;
+     overflow: hidden;
+
+ }
+ .span-unit{
+     width: 40px;
+     height: 40px;
+     line-height: 40px;
+     position: absolute;
+     display: inline-block;
+     font-size: 12px;
+     padding-left: 5px;
+     top:-4px;
+     right: -8px;
+     text-align: left;
+     background: #4accf3;
+     /*padding:5% 8%;*/
+     border-top-left-radius: 50%;
+     border-bottom-left-radius: 50%;
+ }
+ .item-header-company-icon{
+     width: 10%;
+ }
+ #box-for{
+     padding-right:0;
+     position: relative;
+ }
+ .time-bg-init{
+     background: #043f8a;
+     color: #d84052;
+     font-size: 17px;
+ }
+ .danwei{
+     bottom: -5px;
+     right: -5px;
+     text-align: right;
+     font-size: 10px;
+ }

@@ -1,39 +1,98 @@
 import _ from 'lodash';
-import './style.css';
-import Icon from './images/logo.png';
-import printMe from './print.js';
+
+import Icon from './images/tri-title-icon.png';
+import useStatis from './images/usesta-icon.png';
+import companySumIcon from './images/company-sum-icon.png'
+
+import icon_1 from './images/top-left.png';
+import icon_2 from './images/top-right.png';
+import icon_3 from './images/bottom-left.png';
+import icon_4 from './images/bottom-right.png';
+
+import setPosition from './print.js';
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/AdminLTE.css'
+import './style.css';
 import 'bootstrap/dist/js/bootstrap.js'
 
 require('bootstrap');
 
 var echarts = require('echarts');
+
 import 'echarts/chart/map';
-// var obj = JSON.parse(data)
+import 'echarts/chart/bar';
+import 'echarts/chart/pie';
+import 'echarts/theme/infographic';
 
-function component() {
-    var element = document.createElement('div');
 
-    // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的
-    //// Lodash, now imported by this script
-    element.innerHTML = _.join(['whats up', 'webpack'], ' ');
-    element.classList.add('hello');
-
-    var btn = document.createElement('button');
-    btn.innerHTML = 'Click me and check the console!';
-    btn.onclick = printMe;
-    element.appendChild(btn);
+function component(title,rightContent,classTittleList,classList,classFlagList,img,isborder) {
+     var element = document.createElement('div');
 
     // 将图像添加到我们现有的 div
      var myIcon = new Image();
-     myIcon.src = Icon;
-     element.appendChild(myIcon);
-     return element;
-}
+     myIcon.src = img;
+    for(var i in classTittleList){
+        myIcon.classList.add(classTittleList[i]);
+    }
 
-document.body.appendChild(component());
+
+    var oFrag=document.createDocumentFragment();
+    var eleTime=document.createElement('span');//当月用电量统计-时间
+    eleTime.classList.add('time-block-bg','clearfix');
+    var otime=document.createElement('span');
+
+    for(var i in classFlagList){
+        otime.classList.add(classFlagList[i]);
+    }
+    otime.innerHTML=rightContent;
+    oFrag.appendChild(otime);
+
+
+    if(isborder){
+        eleTime.appendChild(setPosition());
+    }else{
+        var spanUnit=document.createElement('span');
+        spanUnit.innerHTML='kwh';
+        spanUnit.classList.add('text-red','span-unit');
+        otime.appendChild(spanUnit);
+    }
+    eleTime.appendChild(oFrag);
+    // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的
+    element.innerHTML = title;
+    for(var i in classList){
+        element.classList.add(classList[i]);
+    }
+
+
+    element.appendChild(myIcon);
+    element.appendChild(eleTime);
+    return element;
+}
+/*
+* 当月用电量统计
+* */
+var class1=['item-header','text-blue','clearfix'];
+var classTittle=['item-header-img','item-right'];
+var classFlag=['time-bg'];//right的样式表
+document.getElementById("box-one").appendChild(component('当月用电量统计','2017-12',classTittle,class1,classFlag,Icon,true));
+
+/*
+*当月用电统计
+* */
+var class2=['item-header','text-yellow','clearfix'];
+var classTittleIcon=['item-header-img','item-header-img-icon','item-right'];
+var classFlag1=['time-bg','time-bg-blue','clearfix'];//right的样式表
+document.getElementById("box-two").appendChild(component('当月用电统计','158829',classTittleIcon,class2,classFlag1,useStatis,false));
+/*
+*接入企业数
+* */
+var class2=['item-header','text-blue','clearfix'];
+var classTittleIcon=['item-header-img','item-header-company-icon','item-right'];
+var classFlag2=['time-bg','time-bg-init'];//right的样式表
+document.getElementById("box-for").appendChild(component('接入企业数','16848',classTittleIcon,class1,classFlag2,companySumIcon,true));
+
+
 
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('main'));
@@ -256,18 +315,6 @@ myChart.setOption( {
             color: '#fff'
         }
     },
-    // toolbox: {
-    //     show : true,
-    //     orient : 'vertical',
-    //     x: 'right',
-    //     y: 'center',
-    //     feature : {
-    //         mark : {show: true},
-    //         dataView : {show: true, readOnly: false},
-    //         restore : {show: true},
-    //         saveAsImage : {show: true}
-    //     }
-    // },
     series : [
         {
             name: '弱',
@@ -322,7 +369,7 @@ myChart.setOption( {
                 data : (function(){
                     var data = [];
                     var len = 1000;
-                    var geoCoord
+                    var geoCoord;
                     while(len--) {
                         geoCoord = placeList[len % placeList.length].geoCoord;
                         data.push({
@@ -368,8 +415,246 @@ myChart.setOption( {
         }
     ]
 });
+function setChart(chartId,appendId){
+    var obarDiv=document.createElement("div");
+    obarDiv.id=chartId;
+    var oFrag=document.createDocumentFragment();
+    oFrag.appendChild(obarDiv);
 
+    document.getElementById(appendId).append(oFrag);
+    return obarDiv;
+}
+var obarDiv=setChart('barUseDiv','box-one');
+
+var barUseChart = echarts.init(obarDiv,'infographic');
+barUseChart.setOption( {
+
+    dataZoom : {
+        show : true,
+        realtime : true,
+        start : 0,
+        end : 35,
+        height: 8,
+        textStyle: {
+            color:"#333"
+        },
+        backgroundColor:'rgba(51,117,182,0.5)',
+        fillerColor:'rgba(240,189,38,1)',
+        dataBackgroundColor:{
+            lineStyle: {
+              color: '#044b8f'
+            }
+        },
+        textStyle: {
+            color: '#fff'
+        }
+       //handleColor:"rgba(240,189,38,1)",
+
+    },
+    grid:{
+        x:30,
+        y:30,
+        x2:15,
+        y2:35,
+        borderColor: '#0b4795'
+    },
+    tooltip : {
+        trigger: 'axis',
+        axisPointer: {
+            lineStyle: {
+                "color": "#48b"
+            },
+            crossStyle:{
+                "color": "#48b"
+            }
+        }
+    },
+    legend: {
+        data:['用电量'],
+        orient: 'horizontal',
+        x:'right',
+        y:'6%',
+        textStyle: {
+            color:"#d84052"
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+
+            data :  function (){
+                var list = [];
+                for (var i = 1; i <= 30; i++) {
+                    list.push('12-'+i);
+                }
+                return list;
+            }()
+        }
+    ],
+    yAxis : [
+        {
+            type: 'value',
+            name: '单位(/kwh)',
+            nameTextStyle: {
+                color:'#fff',
+                fontSize: 12
+            }
+        }
+    ],
+    axis:{
+        boundaryGap: true
+    },
+    series : [
+        {
+            name:'用电量',
+            type:'bar',
+            data:function (){
+                var list = [];
+                for (var i = 1; i <= 30; i++) {
+                    list.push(Math.round(Math.random()* 40));
+                }
+                return list;
+            }(),
+            barGap: '25%',
+            barCategoryGap:'40%',
+            itemStyle: {
+                normal: {
+                    color: "#d84052",
+                    barBorderRadius: 4,
+                    label: {
+                        textStyle: {
+                            color: 'red'
+                        }
+                    }
+                },
+                emphasis: {
+                    color: "#bf2c3e",
+                    barBorderRadius: 4
+               }
+            }
+
+        }
+    ]
+});
+
+
+
+var opieDiv=setChart('pieUseDiv','box-two');
+
+var pieUseChart = echarts.init(opieDiv,'infographic');
+pieUseChart.setOption(  {
+    // title : {
+    //     text: '某站点用户访问来源',
+    //     subtext: '纯属虚构',
+    //     x:'center'
+    // },
+    color: [
+        "#00b7ee",
+        "#d84052",
+        "#009e96",
+        "#f0bd26",
+        "#aaaaaa"
+    ],
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : 'left',
+        data:['动力','空调','照明','空压','电梯'],
+        itemGap:5,
+        textStyle: {
+            color: 'auto'
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'用电统计',
+            type:'pie',
+            radius : '60%',
+            center: ['55%', '50%'],
+            data:[
+                {value:32, name:'动力'},
+                {value:29, name:'空调'},
+                {value:15, name:'照明'},
+                {value:15, name:'空压'},
+                {value:9, name:'电梯'}
+            ]
+        }
+    ]
+});
+
+var opieAreaDiv=setChart('pieSumDiv','box-for');
+var pieAreaChart = echarts.init(opieAreaDiv,'infographic');
+pieAreaChart.setOption({
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x : 'left',
+        y : 'top',
+        data:['抄表监控','能效管理','光伏电效'],
+        itemGap:5,
+        textStyle: {
+           color: 'auto'
+        }
+    },
+    calculable : false,
+    series : [
+
+        {
+            name:'接入企业数',
+            type:'pie',
+            radius : ['10%', '80%'],
+            center : ['55%', '70%'],
+            roseType : 'area',
+            // max:5,                // for funnel
+            sort : 'ascending',     // for funnel
+            itemStyle : {
+                normal : {
+                    label : {
+                        position : 'inner',
+                        formatter : function (params) {
+                            return (params.percent - 0).toFixed(0) + '%';
+                        },
+                        // formatter:'{d}%',
+                        align: 'right',
+                    },
+                    labelLine : {
+                        show : false
+                    }
+                },
+                emphasis : {
+                    label : {
+                        show : true,
+                        formatter : "{b}\n{d}%"
+                    }
+                }
+
+            },
+            data:[
+                {value:10, name:'抄表监控'},
+                {value:5, name:'能效管理'},
+                {value:15, name:'光伏电效'}
+            ]
+        }
+    ]
+});
+
+
+
+
+
+/* 初始化表格 */
 window.onresize = function () {
-    myChart.resize();
+    myChart.resize();//地图
+    barUseChart.resize();//当月用电量统计
+    pieUseChart.resize();//当月用电统计
+    pieAreaChart.resize();//接入企业数
 }
 // $("body").append("<div>hello world</div>")
