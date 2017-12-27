@@ -3,6 +3,10 @@ import _ from 'lodash';
 import Icon from './images/tri-title-icon.png';
 import useStatis from './images/usesta-icon.png';
 import companySumIcon from './images/company-sum-icon.png'
+import irImgUrl from './images/ir-bg.png'
+import conLeft from './images/title-left-set.png'
+import conRight from './images/title-right-set.png'
+import cloudIcon from './images/cloud-icon.png'
 
 import icon_1 from './images/top-left.png';
 import icon_2 from './images/top-right.png';
@@ -23,6 +27,7 @@ var echarts = require('echarts');
 import 'echarts/chart/map';
 import 'echarts/chart/bar';
 import 'echarts/chart/pie';
+import 'echarts/chart/line';
 import 'echarts/theme/infographic';
 
 
@@ -91,6 +96,50 @@ var class2=['item-header','text-blue','clearfix'];
 var classTittleIcon=['item-header-img','item-header-company-icon','item-right'];
 var classFlag2=['time-bg','time-bg-init'];//right的样式表
 document.getElementById("box-for").appendChild(component('接入企业数','16848',classTittleIcon,class1,classFlag2,companySumIcon,true));
+
+var oFrag=document.createDocumentFragment();
+var oAccount=document.createElement('p');//接入节点数
+oAccount.innerHTML='接入节点数';
+oAccount.classList.add('irregular-sum');
+
+var irDiv=document.createElement("div");
+irDiv.classList.add('ir-div','clearfix');
+var irImg = new Image();
+irImg.src = irImgUrl;
+irDiv.appendChild(oAccount);
+irDiv.appendChild(irImg);
+oFrag.appendChild(irDiv);
+var list=document.getElementById("box-three");
+list.insertBefore(oFrag,list.childNodes[0]);
+
+/* 时间天气 */
+var oFrag=document.createDocumentFragment();
+var oTimeTittle=document.createElement('p');//时间
+var oInnerIcon1=new Image();
+oInnerIcon1.src=conLeft;
+oInnerIcon1.classList.add('title-img-em');
+
+var oInnerIcon2=new Image();
+oInnerIcon2.src=conRight;
+oInnerIcon2.classList.add('title-img-em');
+var conTit=document.getElementById("contentTittle");
+conTit.insertBefore(oInnerIcon1,conTit.childNodes[0]);
+conTit.insertBefore(oInnerIcon2,conTit.childNodes[2]);
+var oCloudIcon=new Image();
+oCloudIcon.src=cloudIcon;
+oCloudIcon.classList.add('cloud-title-img');
+conTit.insertBefore(oCloudIcon,conTit.childNodes[3]);
+
+
+
+function getSizeTop(){//算累计用电量的高度
+    var winHeight = window.innerHeight?window.innerHeight:document.body.clientHeight;
+    var finalHeight=winHeight-$('.hl-footer').innerHeight()-20;
+    $('.hl-footer').css({"top":finalHeight+'px'});
+}
+getSizeTop();
+
+
 
 
 
@@ -475,7 +524,7 @@ barUseChart.setOption( {
         x:'right',
         y:'6%',
         textStyle: {
-            color:"#d84052"
+            color:"auto"
         }
     },
     calculable : true,
@@ -590,10 +639,10 @@ pieUseChart.setOption(  {
 var opieAreaDiv=setChart('pieSumDiv','box-for');
 var pieAreaChart = echarts.init(opieAreaDiv,'infographic');
 pieAreaChart.setOption({
-    tooltip : {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
+    // tooltip : {
+    //     trigger: 'item',
+    //     formatter: "{a} <br/>{b} : {c} ({d}%)"
+    // },
     legend: {
         orient: 'vertical',
         x : 'left',
@@ -646,6 +695,110 @@ pieAreaChart.setOption({
     ]
 });
 
+var creatlineChart = echarts.init(document.getElementById('creatlineDiv'),'infographic');//发电量
+creatlineChart.setOption( {
+
+    dataZoom : {
+        show : true,
+        realtime : true,
+        start : 0,
+        end : 35,
+        height: 8,
+        textStyle: {
+            color:"#333"
+        },
+        backgroundColor:'rgba(51,117,182,0.5)',
+        fillerColor:'rgba(240,189,38,1)',
+        dataBackgroundColor:{
+            lineStyle: {
+                color: '#044b8f'
+            }
+        },
+        textStyle: {
+            color: '#fff'
+        }
+        //handleColor:"rgba(240,189,38,1)",
+
+    },
+    grid:{
+        x:30,
+        y:30,
+        x2:15,
+        y2:35,
+        borderColor: '#0b4795'
+    },
+    tooltip : {
+        trigger: 'axis',
+        axisPointer: {
+            lineStyle: {
+                "color": "#48b"
+            },
+            crossStyle:{
+                "color": "#48b"
+            }
+        }
+    },
+    legend: {
+        data:['发电量'],
+        orient: 'horizontal',
+        x:'right',
+        y:'6%',
+        textStyle: {
+            color:"auto"
+        }
+    },
+    // calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data :  function (){
+                var list = [];
+                for (var i = 1; i <= 30; i++) {
+                    list.push('12-'+i);
+                }
+                return list;
+            }()
+        }
+    ],
+    yAxis : [
+        {
+            type: 'value',
+            name: '单位(/kwh)',
+            nameTextStyle: {
+                color:'#fff',
+                fontSize: 12
+            }
+        }
+    ],
+
+    series : [
+        {
+            name:'发电量',
+            type:'line',
+            smooth:true,
+            showAllSymbol: true, //标注所有数据点
+            symbol: 'emptyCircle',
+            data:function (){
+                var list = [];
+                for (var i = 1; i <= 30; i++) {
+                    list.push(Math.round(Math.random()* 40));
+                }
+                return list;
+            }(),
+            itemStyle: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    areaStyle: {type: 'default'}
+                }
+            }
+
+        }
+    ]
+});
+
+
 
 
 
@@ -656,5 +809,7 @@ window.onresize = function () {
     barUseChart.resize();//当月用电量统计
     pieUseChart.resize();//当月用电统计
     pieAreaChart.resize();//接入企业数
+    creatlineChart.resize();//发电量
+    getSizeTop();
 }
 // $("body").append("<div>hello world</div>")
