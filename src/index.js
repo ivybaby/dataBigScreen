@@ -189,14 +189,16 @@ $('.reduce-item-3').prepend(reduce3);
 function getTri(imgSrcTop,imgSrcBtm,obj){
     var triImgTop='<img src='+imgSrcTop+'/>';
     var oTop= $(obj).children('.rb-absulte-top');
-    console.log(oTop.children('img').height());
     oTop.prepend(triImgTop);
+
     var triImgBottom='<img src='+imgSrcBtm+'/>';
     var oBottom=$(obj).children('.rb-absulte-bottom');
     oBottom.prepend(triImgBottom);
+    console.log($('.rb-1 .rb-absulte-top').innerHeight());
 }
 getTri(triIconTop1,triIconBtm1,'.rb-1');
 getTri(triIconTop2,triIconBtm2,'.rb-2');
+getTri(triIconTop3,triIconBtm3,'.rb-3');
 
 
 

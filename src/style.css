@@ -389,6 +389,7 @@ img{
      height: 40%;
      float: right;
      position: relative;
+     padding-top:14%;
  }
 
  .rb-item{
@@ -398,6 +399,9 @@ img{
      padding-right: 4px;
      line-height: 16px;
  }
+ .rb-absulte,.rb-item img{
+     height: auto;
+ }
  .rb-1{
      background:#f0bd26;
  }
@@ -406,9 +410,9 @@ img{
  }
  .rb-3{
      background:#00b7ee;
-     margin-top: 10%;
+     margin-top: 14%;
      float: left;
-     margin-left: 15%;
+     margin-left: 20%;
  }
  .rb-1 .rb-absulte-top{
      top: -18.89px;
@@ -424,6 +428,10 @@ img{
  }
  .rb-item .rb-absulte-bottom{
      bottom: -18.89px;
+ }
+ .rb-item   .rb-absulte >img{
+     width: 100%;
+     height: auto;
  }
  .font-12{
      font-size: 12px;
@@ -476,6 +484,4 @@ img{
 .reduce-item img{
     width:60%;
 }
-.rb-item   .rb-absulte >img{
-    width: 100%;
-}
+
