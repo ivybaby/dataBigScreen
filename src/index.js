@@ -7,6 +7,19 @@ import irImgUrl from './images/ir-bg.png'
 import conLeft from './images/title-left-set.png'
 import conRight from './images/title-right-set.png'
 import cloudIcon from './images/cloud-icon.png'
+import dayLeftIcon from './images/day-left-tri.png'
+import dayRightIcon from './images/day-right-tri.png'
+import cornerIcon from './images/corner_fix.png'
+import emissionIcon from './images/emission_icon.png'
+import reduceIcon1 from './images/discrease_co2.png'
+import reduceIcon2 from './images/dismei_icon.png'
+import reduceIcon3 from './images/disTree_icon.png'
+import triIconTop1 from './images/tri_yellow_top.png'
+import triIconBtm1 from './images/tri_yellow_bottom.png'
+import triIconTop2 from './images/tri_orange_top.png'
+import triIconBtm2 from './images/tri_orange_bottom.png'
+import triIconTop3 from './images/tri_blue_top.png'
+import triIconBtm3 from './images/tri_blue_bottom.png'
 
 import icon_1 from './images/top-left.png';
 import icon_2 from './images/top-right.png';
@@ -40,29 +53,32 @@ function component(title,rightContent,classTittleList,classList,classFlagList,im
     for(var i in classTittleList){
         myIcon.classList.add(classTittleList[i]);
     }
-
-
     var oFrag=document.createDocumentFragment();
-    var eleTime=document.createElement('span');//当月用电量统计-时间
-    eleTime.classList.add('time-block-bg','clearfix');
-    var otime=document.createElement('span');
+    if(rightContent.length>0){
 
-    for(var i in classFlagList){
-        otime.classList.add(classFlagList[i]);
+        var eleTime=document.createElement('span');//当月用电量统计-时间
+        eleTime.classList.add('time-block-bg','clearfix');
+        var otime=document.createElement('span');
+
+        for(var i in classFlagList){
+            otime.classList.add(classFlagList[i]);
+        }
+        otime.innerHTML=rightContent;
+        oFrag.appendChild(otime);
+
+        if(isborder){
+            eleTime.appendChild(setPosition());
+        }else{
+            var spanUnit=document.createElement('span');
+            spanUnit.innerHTML='kwh';
+            spanUnit.classList.add('text-red','span-unit');
+            otime.appendChild(spanUnit);
+        }
+        eleTime.appendChild(oFrag);
     }
-    otime.innerHTML=rightContent;
-    oFrag.appendChild(otime);
 
 
-    if(isborder){
-        eleTime.appendChild(setPosition());
-    }else{
-        var spanUnit=document.createElement('span');
-        spanUnit.innerHTML='kwh';
-        spanUnit.classList.add('text-red','span-unit');
-        otime.appendChild(spanUnit);
-    }
-    eleTime.appendChild(oFrag);
+
     // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的
     element.innerHTML = title;
     for(var i in classList){
@@ -71,7 +87,10 @@ function component(title,rightContent,classTittleList,classList,classFlagList,im
 
 
     element.appendChild(myIcon);
-    element.appendChild(eleTime);
+    if(rightContent.length>0){
+        element.appendChild(eleTime);
+    }
+
     return element;
 }
 /*
@@ -96,6 +115,16 @@ var class2=['item-header','text-blue','clearfix'];
 var classTittleIcon=['item-header-img','item-header-company-icon','item-right'];
 var classFlag2=['time-bg','time-bg-init'];//right的样式表
 document.getElementById("box-for").appendChild(component('接入企业数','16848',classTittleIcon,class1,classFlag2,companySumIcon,true));
+
+/*
+*节能减排
+* */
+var class3=['item-header','text-yellow','clearfix'];
+var classTittleIcon3=['item-header-img','item-header-img-icon','item-right'];
+var classFlag3=['time-bg','time-bg-init'];//right的样式表
+var reduceList=document.getElementById("box-five");
+
+reduceList.insertBefore(component('节能减排','',classTittleIcon3,class3,classFlag3,emissionIcon,true),reduceList.childNodes[0]);
 
 var oFrag=document.createDocumentFragment();
 var oAccount=document.createElement('p');//接入节点数
@@ -130,6 +159,18 @@ oCloudIcon.src=cloudIcon;
 oCloudIcon.classList.add('cloud-title-img');
 conTit.insertBefore(oCloudIcon,conTit.childNodes[3]);
 
+var oDayIcon=new Image();
+oDayIcon.src=dayLeftIcon;
+document.getElementById('day-left-icon').appendChild(oDayIcon);
+
+var oDayIconRight=new Image();
+oDayIconRight.src=dayRightIcon;
+document.getElementById('day-right-icon').appendChild(oDayIconRight);
+
+var ocorner=new Image();
+ocorner.src=cornerIcon;
+document.getElementById('especial-corner').appendChild(ocorner);
+
 
 
 function getSizeTop(){//算累计用电量的高度
@@ -138,6 +179,24 @@ function getSizeTop(){//算累计用电量的高度
     $('.hl-footer').css({"top":finalHeight+'px'});
 }
 getSizeTop();
+var reduce1='<img src='+reduceIcon1+'/>';
+$('.reduce-item-1').prepend(reduce1);
+var reduce2='<img src='+reduceIcon2+'/>';
+$('.reduce-item-2').prepend(reduce2);
+var reduce3='<img src='+reduceIcon3+'/>';
+$('.reduce-item-3').prepend(reduce3);
+
+function getTri(imgSrcTop,imgSrcBtm,obj){
+    var triImgTop='<img src='+imgSrcTop+'/>';
+    var oTop= $(obj).children('.rb-absulte-top');
+    console.log(oTop.children('img').height());
+    oTop.prepend(triImgTop);
+    var triImgBottom='<img src='+imgSrcBtm+'/>';
+    var oBottom=$(obj).children('.rb-absulte-bottom');
+    oBottom.prepend(triImgBottom);
+}
+getTri(triIconTop1,triIconBtm1,'.rb-1');
+getTri(triIconTop2,triIconBtm2,'.rb-2');
 
 
 
@@ -798,6 +857,65 @@ creatlineChart.setOption( {
     ]
 });
 
+var oCreatEletricDiv=setChart('creatEletricDiv','creatPowerDiv');
+
+var creatEletricChart = echarts.init(oCreatEletricDiv,'infographic');
+creatEletricChart.setOption({
+    // title: {
+    //     text: '世界人口总量',
+    //     subtext: '数据来自网络'
+    // },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        show:false,
+        data: ['2011年']
+    },
+    grid: {
+        x:45,
+        y:25,
+        x2:25,
+        y2:8,
+        borderColor: '#0b4795',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        position: 'top',
+        boundaryGap: [0, 0.01]
+    },
+    yAxis: {
+        type: 'category',
+        data:['风力','分布式\n光伏','地热']
+
+    },
+    series: [
+        {
+            name: '2011年',
+            type: 'bar',
+            data: [1303, 3489, 9034],
+            barGap: '25%',
+            barCategoryGap:'40%',
+            itemStyle: {
+                normal: {
+                    color: "#f0bd26",
+                    barBorderRadius: 4,
+                    label: {
+                        textStyle: {
+                            color: '#f0bd26'
+                        }
+                    }
+                }
+            }
+        }
+    ]
+});
+
+
 
 
 
@@ -810,6 +928,7 @@ window.onresize = function () {
     pieUseChart.resize();//当月用电统计
     pieAreaChart.resize();//接入企业数
     creatlineChart.resize();//发电量
+    creatEletricChart.resize()
     getSizeTop();
 }
 // $("body").append("<div>hello world</div>")

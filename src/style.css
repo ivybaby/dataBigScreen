@@ -13,10 +13,8 @@ img{
      overflow-y: hidden;
  }
 
-.hello {
-    color: red;
-    font-family: 'MyFont';
-    /*background: url('images/user.png');*/
+.text-norwap{
+    white-space: nowrap;
 }
 #main{
     width: 100%;height: 100%;
@@ -128,7 +126,7 @@ img{
  /*
  *layout-left
   */
- .item-header,#box-three, .ir-div,.ir-div > .irregular-sum,.hl-content-title{
+ .item-header,#box-three, .ir-div,.ir-div > .irregular-sum,.hl-content-title,.center-focus-title,#box-five{
      position: relative;
  }
  .item-header-img{
@@ -143,7 +141,7 @@ img{
  .text-init{
      color: #ffffff;
  }
- .time-border,.time-block-bg, .danwei,.hl-footer{
+ .time-border,.time-block-bg, .danwei,.hl-footer, #day-left-icon,#day-right-icon, .rb-absulte{
      position: absolute;
  }
  .time-bg{
@@ -196,13 +194,13 @@ img{
  /*
  *chart
  */
- #barUseDiv,#pieUseDiv,#pieSumDiv{
+ #barUseDiv,#pieUseDiv,#pieSumDiv,#creatEletricDiv{
      width: 100%;
      height:calc(90%);
  }
  #creatlineDiv{
      width: 100%;
-     height:calc(50%);
+     height:calc(45%);
  }
 
 
@@ -280,6 +278,7 @@ img{
  }
  .text-empre{
      margin-bottom: 0;
+     white-space: nowrap;
  }
  .text-empre span{
      display: inline-block;
@@ -345,3 +344,138 @@ img{
      font-size: 40px;
      margin-right: 2px;
  }
+ .time-block-change.time-block-bg{
+     position: relative;
+ }
+ .time-block-change{
+    top:0;
+ }
+ .center-focus-title{
+     text-align: center;
+     margin-top: 3%;
+     height: 30px;
+ }
+ #day-left-icon,#day-right-icon{
+    top:5px;
+ }
+ #day-left-icon {
+     left: -15px;
+ }
+ #day-right-icon{
+     right:-15px;
+ }
+
+ .time-block-change .time-bg-init{
+   font-size: 14px;
+     min-width: 88px;
+ }
+ .especial-right-bg{
+     border-bottom-left-radius:60px;
+ }
+ #especial-corner{
+     position: absolute;
+     left: 0;
+     bottom:-2%;
+ }
+ #especial-corner img{
+     width:150px;
+ }
+ .danwei-power{
+     bottom: 5px;
+     right: 0;
+ }
+ .rhombus{
+     width: 55%;
+     height: 40%;
+     float: right;
+     position: relative;
+ }
+
+ .rb-item{
+     text-align: center;
+     position: relative;
+     padding-left: 4px;
+     padding-right: 4px;
+     line-height: 16px;
+ }
+ .rb-1{
+     background:#f0bd26;
+ }
+ .rb-2{
+     background:#ec6941;
+ }
+ .rb-3{
+     background:#00b7ee;
+     margin-top: 10%;
+     float: left;
+     margin-left: 15%;
+ }
+ .rb-1 .rb-absulte-top{
+     top: -18.89px;
+ }
+ .rb-1 .rb-absulte-top img{
+     vertical-align:initial;
+ }
+ .rb-item .rb-absulte-top,.rb-item .rb-absulte-bottom{
+     left: 0;
+ }
+ .rb-item .rb-absulte{
+     width: 100%;
+ }
+ .rb-item .rb-absulte-bottom{
+     bottom: -18.89px;
+ }
+ .font-12{
+     font-size: 12px;
+ }
+
+
+ /*
+ *节能减排
+ */
+ #box-five, #creatPowerDiv{
+     padding:2%;
+     height: 45%;
+     width: 100%;
+ }
+ #box-five{
+    padding: 2% 4%;
+ }
+ #creatPowerDiv{
+     height: 55%;
+     padding-left: 0;
+     padding-right: 0;
+ }
+ #creatPowerDiv > p, .reduce-emission p,.rb-item p{
+     margin-bottom: 0;
+ }
+ #creatPowerDiv > p{
+     float: left;
+ }
+
+ .reduce-item{
+   padding-left: 2px;
+     padding-right: 2px;
+ }
+ .reduce-item > .reduce-item-title,.reduce-item .item-small{
+   font-size: 12px;
+ }
+
+ .reduce-item-1 em{
+     font-size:14px;
+ }
+ .reduce-item-2 em{
+     font-size:16px;
+ }
+ .reduce-item-3 em{
+     font-size:14px;
+ }
+.reduce-item em{
+    margin-right: 2px;
+}
+.reduce-item img{
+    width:60%;
+}
+.rb-item   .rb-absulte >img{
+    width: 100%;
+}
