@@ -342,7 +342,7 @@ img{
  .hl-footer-Div > .hl-footer-item{
      font-family: 'MyFont';
      font-size: 40px;
-     margin-right: 2px;
+     margin-right: 4px;
  }
  .time-block-change.time-block-bg{
      position: relative;
@@ -386,10 +386,10 @@ img{
  }
  .rhombus{
      width: 55%;
-     height: 40%;
+     /*height: 40%;*/
      float: right;
      position: relative;
-     padding-top:14%;
+     padding-top:13%;
  }
 
  .rb-item{
@@ -407,17 +407,29 @@ img{
  }
  .rb-2{
      background:#ec6941;
+     margin-top:-3%;
  }
  .rb-3{
      background:#00b7ee;
-     margin-top: 14%;
-     float: left;
-     margin-left: 20%;
+     position: absolute;
+ }
+ .hl-footer{
+     padding-right: 30px;
+ }
+ .hl-footer-inner-active .hl-footer-Div{
+     text-align: right;
+ }
+ .hl-footer-inner-active .hl-footer-Div{
+     display: inline-block;
+     float: right;
+ }
+ .hl-footer-Div .hl-footer-item{
+  float: left;
  }
  .rb-1 .rb-absulte-top{
      top: -18.89px;
  }
- .rb-1 .rb-absulte-top img{
+ .rb-item .rb-absulte-top img{
      vertical-align:initial;
  }
  .rb-item .rb-absulte-top,.rb-item .rb-absulte-bottom{
@@ -432,6 +444,10 @@ img{
  .rb-item   .rb-absulte >img{
      width: 100%;
      height: auto;
+ }
+ .rb-2 p{
+     padding-top: 6%;
+     padding-bottom:6%;
  }
  .font-12{
      font-size: 12px;

@@ -172,11 +172,25 @@ ocorner.src=cornerIcon;
 document.getElementById('especial-corner').appendChild(ocorner);
 
 
+function allAccount(obj){
+    var oBbj=$(obj).find('.text-init');
+    var xWid=oBbj.innerWidth();
+    var sum=0;
+
+    $(obj).find('.hl-footer-item').each(function () {
+        sum=sum+$(this).innerWidth();
+        console.log($(this).innerWidth());
+    });
+    var oWid=$(obj).innerWidth()-$(obj).find('.hl-footer-Div').innerWidth();
+    oBbj.css({'padding-left':(oWid-30)+'px'});
+}
 
 function getSizeTop(){//算累计用电量的高度
     var winHeight = window.innerHeight?window.innerHeight:document.body.clientHeight;
     var finalHeight=winHeight-$('.hl-footer').innerHeight()-20;
     $('.hl-footer').css({"top":finalHeight+'px'});
+
+    allAccount('.hl-footer-inner-active')
 }
 getSizeTop();
 var reduce1='<img src='+reduceIcon1+'/>';
@@ -189,16 +203,29 @@ $('.reduce-item-3').prepend(reduce3);
 function getTri(imgSrcTop,imgSrcBtm,obj){
     var triImgTop='<img src='+imgSrcTop+'/>';
     var oTop= $(obj).children('.rb-absulte-top');
+    oTop.children().remove();
     oTop.prepend(triImgTop);
+    var xTop=oTop.innerHeight();
+    oTop.css({'top':-xTop+'px'}).children('img').css({'height':xTop+'px'});
 
     var triImgBottom='<img src='+imgSrcBtm+'/>';
     var oBottom=$(obj).children('.rb-absulte-bottom');
+    oBottom.children().remove();
     oBottom.prepend(triImgBottom);
-    console.log($('.rb-1 .rb-absulte-top').innerHeight());
+    var  xBtm=oBottom.innerHeight();
+    oBottom.css({'bottom':-xBtm+'px'}).children('img').css({'height':xBtm+'px'});
+    if(obj=='.rb-3'){
+        var xExa=$('.rhombus').innerHeight()+xBtm+4;
+        var owid=(($('.rhombus').innerWidth())*0.21).toFixed(2);
+       $(obj).css({'top':xExa+'px','left':owid+'px'});
+    }
 }
+
 getTri(triIconTop1,triIconBtm1,'.rb-1');
 getTri(triIconTop2,triIconBtm2,'.rb-2');
 getTri(triIconTop3,triIconBtm3,'.rb-3');
+
+
 
 
 
@@ -930,7 +957,12 @@ window.onresize = function () {
     pieUseChart.resize();//当月用电统计
     pieAreaChart.resize();//接入企业数
     creatlineChart.resize();//发电量
-    creatEletricChart.resize()
+    creatEletricChart.resize();
     getSizeTop();
+    getTri(triIconTop1,triIconBtm1,'.rb-1');
+    getTri(triIconTop2,triIconBtm2,'.rb-2');
+    getTri(triIconTop3,triIconBtm3,'.rb-3');
 }
+
+
 // $("body").append("<div>hello world</div>")
