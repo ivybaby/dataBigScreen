@@ -15,7 +15,7 @@ module.exports = {
         hot: true
     },
     plugins: [
-        //new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin(['dist/public']),
         // new HtmlWebpackPlugin({
         //     title: 'Output Management'
         // })
@@ -28,7 +28,7 @@ module.exports = {
     output: {
         // filename: 'bundle.js',
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist/public')
     },
     module: {
          rules: [

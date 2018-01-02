@@ -200,7 +200,7 @@ img{
  }
  #creatlineDiv{
      width: 100%;
-     height:calc(45%);
+     height:calc(50%);
  }
 
 
@@ -385,11 +385,11 @@ img{
      right: 0;
  }
  .rhombus{
-     width: 55%;
+     width: 50%;
      /*height: 40%;*/
      float: right;
      position: relative;
-     padding-top:13%;
+     padding-top:10%;
  }
 
  .rb-item{

@@ -1,0 +1,7 @@
+{
+  "creatElect": "196.25",
+  "useElect": "1526.83",
+  "exclude": [
+    "node_modules"
+  ]
+}
